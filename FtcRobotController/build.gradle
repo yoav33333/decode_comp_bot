@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat
 // build.gradle in FtcRobotController
 //
 apply plugin: 'com.android.library'
+// The kotlin-android plugin should also be applied at the top
+apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
 
@@ -17,14 +19,23 @@ android {
     buildFeatures {
         buildConfig = true
     }
+    compileSdk 34
 
-    compileSdkVersion 30
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
     namespace = 'com.qualcomm.ftcrobotcontroller'
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
-apply from: '../build.dependencies.gradle'
+// All dependencies should be declared together in a single block
+dependencies {
+    implementation 'androidx.core:core-ktx:1.17.0'
+    // This 'apply from' will bring in other dependencies from the specified file.
+    // It's good practice to keep it within or next to the dependencies block.
+    apply from: '../build.dependencies.gradle'
+}
