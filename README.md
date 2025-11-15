@@ -1682,3 +1682,5 @@ Changes include:
  * The API for the Legacy Module and Core Device Interface Module have been updated.
    - Support for encoders with the Legacy Module is now working.
  * The hardware loop has been updated for better performance.
+#   d e c o d e _ c o m p _ b o t  
+ 
