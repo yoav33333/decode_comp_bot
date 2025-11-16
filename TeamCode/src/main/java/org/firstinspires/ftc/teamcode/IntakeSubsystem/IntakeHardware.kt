@@ -1,0 +1,12 @@
+package org.firstinspires.ftc.teamcode.IntakeSubsystem
+
+import dev.nextftc.core.components.Component
+import dev.nextftc.hardware.impl.MotorEx
+
+object IntakeHardware: Component {
+    val intakeMotor = lazy { MotorEx("intakeMotor").brakeMode() }
+    fun setPower(power: Double) {
+        intakeMotor.value.power = power
+    }
+
+}

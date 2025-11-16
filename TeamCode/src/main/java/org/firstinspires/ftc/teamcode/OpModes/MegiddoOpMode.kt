@@ -7,6 +7,7 @@ import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
 import dev.nextftc.ftc.components.LoopTimeComponent
 import org.firstinspires.ftc.robotcore.external.Telemetry
+import org.firstinspires.ftc.teamcode.IntakeSubsystem.IntakeHardware
 import org.firstinspires.ftc.teamcode.Pedro.Constants
 import org.firstinspires.ftc.teamcode.Robot.MyTelemetry
 import org.firstinspires.ftc.teamcode.Util.LoopTimer
@@ -18,8 +19,8 @@ open class MegiddoOpMode: NextFTCOpMode() {
             BulkReadComponent,
             LoopTimer,
             MyTelemetry,
-            PedroComponent(Constants::createFollower)
-
+            PedroComponent(Constants::createFollower),
+            IntakeHardware
         )
     }
 }
