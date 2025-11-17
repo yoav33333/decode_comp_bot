@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.IntakeSubsystem
+package org.firstinspires.ftc.teamcode.Subsystems.IntakeSubsystem
 
 import com.bylazar.configurables.annotations.Configurable
 

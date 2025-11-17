@@ -1,14 +1,14 @@
-package org.firstinspires.ftc.teamcode.DriveSubsystem
+package org.firstinspires.ftc.teamcode.Subsystems.DriveSubsystem
 
 import PoseKalmanFilter
 import com.pedropathing.geometry.Pose
 import dev.nextftc.core.components.Component
-import org.firstinspires.ftc.teamcode.DriveSubsystem.DriveVars.trustDeadHeading
-import org.firstinspires.ftc.teamcode.DriveSubsystem.DriveVars.trustDeadX
-import org.firstinspires.ftc.teamcode.DriveSubsystem.DriveVars.trustDeadY
-import org.firstinspires.ftc.teamcode.DriveSubsystem.DriveVars.trustLLHeading
-import org.firstinspires.ftc.teamcode.DriveSubsystem.DriveVars.trustLLX
-import org.firstinspires.ftc.teamcode.DriveSubsystem.DriveVars.trustLLY
+import org.firstinspires.ftc.teamcode.Subsystems.DriveSubsystem.DriveVars.trustDeadHeading
+import org.firstinspires.ftc.teamcode.Subsystems.DriveSubsystem.DriveVars.trustDeadX
+import org.firstinspires.ftc.teamcode.Subsystems.DriveSubsystem.DriveVars.trustDeadY
+import org.firstinspires.ftc.teamcode.Subsystems.DriveSubsystem.DriveVars.trustLLHeading
+import org.firstinspires.ftc.teamcode.Subsystems.DriveSubsystem.DriveVars.trustLLX
+import org.firstinspires.ftc.teamcode.Subsystems.DriveSubsystem.DriveVars.trustLLY
 import org.firstinspires.ftc.teamcode.Pedro.Tuning.follower
 
 object DriveHardware: Component {

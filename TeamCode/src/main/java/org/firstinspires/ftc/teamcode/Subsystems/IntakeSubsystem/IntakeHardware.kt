@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.IntakeSubsystem
+package org.firstinspires.ftc.teamcode.Subsystems.IntakeSubsystem
 
 import dev.nextftc.core.components.Component
 import dev.nextftc.hardware.impl.MotorEx

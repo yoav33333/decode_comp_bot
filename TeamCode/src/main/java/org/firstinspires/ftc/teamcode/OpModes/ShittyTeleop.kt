@@ -1,10 +1,9 @@
 package org.firstinspires.ftc.teamcode.OpModes
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
-import dev.nextftc.bindings.Button
 import dev.nextftc.ftc.Gamepads
-import org.firstinspires.ftc.teamcode.DriveSubsystem.DriveCommands
-import org.firstinspires.ftc.teamcode.IntakeSubsystem.IntakeCommands
+import org.firstinspires.ftc.teamcode.Subsystems.DriveSubsystem.DriveCommands
+import org.firstinspires.ftc.teamcode.Subsystems.IntakeSubsystem.IntakeCommands
 
 @TeleOp
 class ShittyTeleop: MegiddoOpMode() {
