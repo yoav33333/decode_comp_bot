@@ -3,21 +3,20 @@ package org.firstinspires.ftc.teamcode.Util
 import kotlin.math.abs
 import kotlin.math.min
 
-class AnglePID @JvmOverloads constructor(
-    var p: Double,
-    var i: Double,
-    var d: Double,
-    var f: Double,
-    private var setPoint: Double = 0.0,
-    private var measuredValue: Double = 0.0
+class AnglePID @JvmOverloads constructor(    var p: Double,
+                                             var i: Double,
+                                             var d: Double,
+                                             var f: Double,
+                                             private var setPoint: Double = 0.0,
+                                             private var measuredValue: Double = 0.0
 ) {
-    private var minIntegral: Double
+    private var minIntegral: Double = -1.0
     private var maxIntegral = 1.0
 
     /**
      * @return the positional error e(t)
      */
-    var positionError: Double
+    var positionError: Double = 0.0
         private set
 
     /**
@@ -30,35 +29,39 @@ class AnglePID @JvmOverloads constructor(
     private var prevErrorVal = 0.0
 
     private var errorTolerance_p = 0.05
-    private var errorTolerance_v = Double.Companion.POSITIVE_INFINITY
+    private var errorTolerance_v = Double.POSITIVE_INFINITY
 
     private var lastTimeStamp = 0.0
     var period: Double = 0.0
         private set
 
-    /**
-     * This is the full constructor for the PIDF controller. Our PIDF controller
-     * includes a feed-forward value which is useful for fighting friction and gravity.
-     * Our errorVal represents the return of e(t) and prevErrorVal is the previous error.
-     *
-     * @param setPoint The setpoint of the pid control loop.
-     * @param measuredValue The measured value of he pid control loop. We want sp = pv, or to the degree
-     * such that sp - pv, or e(t) < tolerance.
-     */
-    /**
-     * The base constructor for the PIDF controller
-     */
     init {
-        minIntegral = -1.0
-
-        this.positionError = setPoint - measuredValue
+        // Initialize positionError correctly on creation
+        positionError = getContinuousError(setPoint - measuredValue)
         reset()
     }
 
     fun reset() {
         totalError = 0.0
-        prevErrorVal = 0.0
+        prevErrorVal = positionError // Start with the current error
         lastTimeStamp = 0.0
+        velocityError = 0.0
+    }
+
+    /**
+     * Wraps an angle error to the range [-180, 180].
+     *
+     * @param error The angle error.
+     * @return The normalized angle error.
+     */
+    private fun getContinuousError(error: Double): Double {
+        var cappedError = error % 360.0
+        if (cappedError > 180.0) {
+            cappedError -= 360.0
+        } else if (cappedError <= -180.0) {
+            cappedError += 360.0
+        }
+        return cappedError
     }
 
     /**
@@ -67,7 +70,7 @@ class AnglePID @JvmOverloads constructor(
      * @param positionTolerance Position error which is tolerable.
      */
     fun setTolerance(positionTolerance: Double) {
-        setTolerance(positionTolerance, Double.Companion.POSITIVE_INFINITY)
+        setTolerance(positionTolerance, Double.POSITIVE_INFINITY)
     }
 
     /**
@@ -95,33 +98,35 @@ class AnglePID @JvmOverloads constructor(
      *
      * @param sp The desired setpoint.
      */
-    fun setSetPoint(sp: Double) {
+    fun setTargetPosition(sp: Double) {
         setPoint = sp
-        this.positionError = setPoint - measuredValue
-        this.velocityError = (this.positionError - prevErrorVal) / period
+        positionError = getContinuousError(setPoint - measuredValue)
+        velocityError = if (abs(period) > 1E-6) {
+            (positionError - prevErrorVal) / period
+        } else {
+            0.0
+        }
     }
 
     /**
-     * Returns true if the error is within the percentage of the total input range, determined by
-     * [.setTolerance].
+     * Returns true if the error is within the acceptable bounds.
      *
      * @return Whether the error is within the acceptable bounds.
      */
     fun atSetPoint(): Boolean {
-        return abs(this.positionError) < errorTolerance_p
-                && abs(this.velocityError) < errorTolerance_v
+        return abs(positionError) < errorTolerance_p && abs(velocityError) < errorTolerance_v
     }
 
-    val coefficients: DoubleArray?
-        /**
-         * @return the PIDF coefficients
-         */
-        get() = doubleArrayOf(this.p, this.i, this.d, this.f)
+    /**
+     * @return the PIDF coefficients
+     */
+    val coefficients: DoubleArray
+        get() = doubleArrayOf(p, i, d, f)
 
-    val tolerance: DoubleArray?
-        /**
-         * @return the tolerances of the controller
-         */
+    /**
+     * @return the tolerances of the controller
+     */
+    val tolerance: DoubleArray
         get() = doubleArrayOf(errorTolerance_p, errorTolerance_v)
 
     /**
@@ -129,65 +134,52 @@ class AnglePID @JvmOverloads constructor(
      *
      * @param pv The given measured value.
      * @param sp The given setpoint.
-     * @return the next output using the given measurd value via
-     * [.calculate].
+     * @return the next output.
      */
     fun calculate(pv: Double, sp: Double): Double {
-        // set the setpoint to the provided value
-        setSetPoint(sp)
+        setTargetPosition(sp)
         return calculate(pv)
     }
 
     /**
      * Calculates the control value, u(t).
      *
-     * @param measuredValue The current measurement of the process variable.
+     * @param pv The current measurement of the process variable.
      * @return the value produced by u(t).
-     */
-    /**
-     * Calculates the next output of the PIDF controller.
-     *
-     * @return the next output using the current measured value via
-     * [.calculate].
      */
     @JvmOverloads
     fun calculate(pv: Double = measuredValue): Double {
-        prevErrorVal = this.positionError
+        prevErrorVal = positionError
 
         val currentTimeStamp = System.nanoTime().toDouble() / 1E9
         if (lastTimeStamp == 0.0) lastTimeStamp = currentTimeStamp
         period = currentTimeStamp - lastTimeStamp
         lastTimeStamp = currentTimeStamp
 
-        if (measuredValue == pv) {
-            this.positionError = (if(abs(setPoint - measuredValue) < 180) setPoint - measuredValue else 360-setPoint - measuredValue)
+        measuredValue = pv
+        positionError = getContinuousError(setPoint - measuredValue)
+
+        velocityError = if (abs(period) > 1E-6) {
+            (positionError - prevErrorVal) / period
         } else {
-            this.positionError = setPoint - pv
-            measuredValue = pv
+            0.0
         }
 
-        if (abs(period) > 1E-6) {
-            this.velocityError = (this.positionError - prevErrorVal) / period
-        } else {
-            this.velocityError = 0.0
-        }
+        totalError += period * positionError
+        totalError = totalError.coerceIn(minIntegral, maxIntegral)
 
-        /*
-        if total error is the integral from 0 to t of e(t')dt', and
-        e(t) = sp - pv, then the total error, E(t), equals sp*t - pv*t.
-         */
-        totalError += period * (setPoint - measuredValue)
-        totalError = if (totalError < minIntegral) minIntegral else min(maxIntegral, totalError)
+        // Feed-forward is typically applied to the setpoint, not just multiplied
+        val feedForward = if (abs(setPoint) > 1E-6) f * setPoint else 0.0
 
         // returns u(t)
-        return this.p * this.positionError + this.i * totalError + this.d * this.velocityError + this.f * setPoint
+        return (p * positionError) + (i * totalError) + (d * velocityError) + feedForward
     }
 
     fun setPIDF(kp: Double, ki: Double, kd: Double, kf: Double) {
-        this.p = kp
-        this.i = ki
-        this.d = kd
-        this.f = kf
+        p = kp
+        i = ki
+        d = kd
+        f = kf
     }
 
     fun setIntegrationBounds(integralMin: Double, integralMax: Double) {
