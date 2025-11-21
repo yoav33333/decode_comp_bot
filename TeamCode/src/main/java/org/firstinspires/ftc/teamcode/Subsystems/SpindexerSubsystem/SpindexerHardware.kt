@@ -51,10 +51,13 @@ object SpindexerHardware: Component {
     fun isAtTargetPosition(): Boolean {
         return anglePID.atSetPoint()
     }
-    override fun postUpdate() {
+    fun updatePid() {
         anglePID.setPIDF(SpindexerVars.p, SpindexerVars.i, SpindexerVars.d, SpindexerVars.f)
         anglePID.setTargetPosition(targetPosition)
         setPower(anglePID.calculate(getPosition()))
+    }
+    override fun postUpdate() {
+        updatePid()
         MyTelemetry.addData("Spindexer Position", getPosition())
         MyTelemetry.addData("Spindexer state", tracker.toString())
     }
