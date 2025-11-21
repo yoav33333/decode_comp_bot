@@ -13,7 +13,7 @@ import org.firstinspires.ftc.teamcode.Util.Util
 //TODO: Tune PIDF values
 //TODO: add color sensor integration
 object SpindexerHardware: Component {
-    private val spindexerEncoder = lazy { hardwareMap.get(AnalogInput::class.java, "encoderForSpindexer1") }
+    val spindexerEncoder = lazy { hardwareMap.get(AnalogInput::class.java, "encoderForSpindexer1") }
     val spindexerServo1 = lazy { CRServoEx("spindexerServo1") }
     val spindexerServo2 = lazy { CRServoEx("spindexerServo2") }
     val tracker = SpindexerTracker()

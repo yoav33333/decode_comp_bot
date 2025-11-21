@@ -5,6 +5,6 @@ import org.firstinspires.ftc.teamcode.Subsystems.IntakeSubsystem.IntakeHardware.
 import org.firstinspires.ftc.teamcode.Subsystems.IntakeSubsystem.IntakeVars.intakePower
 
 object IntakeCommands {
-    val intake = InstantCommand{setPower(intakePower)}
+    val intake = InstantCommand { setPower(intakePower) }
     val stopIntake = InstantCommand { setPower(0.0) }
 }
