@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import dev.nextftc.ftc.Gamepads
 import org.firstinspires.ftc.teamcode.Subsystems.DriveSubsystem.DriveCommands
 import org.firstinspires.ftc.teamcode.Subsystems.IntakeSubsystem.IntakeCommands
+import org.firstinspires.ftc.teamcode.Subsystems.ShooterSubsystem.ShooterCommands
 
 @TeleOp
 class ShittyTeleop: MegiddoOpMode() {
@@ -11,6 +12,9 @@ class ShittyTeleop: MegiddoOpMode() {
         Gamepads.gamepad2.leftBumper
             .whenBecomesTrue(IntakeCommands.intake)
             .whenBecomesFalse(IntakeCommands.stopIntake)
+        Gamepads.gamepad2.rightBumper
+            .whenBecomesTrue { ShooterCommands.shoot }
+            .whenBecomesFalse { ShooterCommands.stopshoot }
     }
     override fun onStartButtonPressed() {
         DriveCommands.driverControlled.start()

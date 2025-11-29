@@ -49,10 +49,13 @@ object ShooterHardware: Component {
         controller.reset()
 
     }
-    override fun postUpdate() {
+    fun updatePID(){
         controller.targetVelocity = targetVelocity
         controller.setPID(ShooterVars.p, ShooterVars.i, ShooterVars.d)
         setPower(controller.calculate(getVelocity()))
+    }
+    override fun postUpdate() {
+        updatePID()
         MyTelemetry.addData("Shooter position", getPosition())
         MyTelemetry.addData("Shooter velocity", getVelocity())
         MyTelemetry.addData("Hood position", getHoodPosition())
