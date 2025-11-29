@@ -10,6 +10,7 @@ import org.firstinspires.ftc.teamcode.Subsystems.DriveSubsystem.DriveVars.trustL
 import org.firstinspires.ftc.teamcode.Subsystems.DriveSubsystem.DriveVars.trustLLX
 import org.firstinspires.ftc.teamcode.Subsystems.DriveSubsystem.DriveVars.trustLLY
 import org.firstinspires.ftc.teamcode.Pedro.Tuning.follower
+import org.firstinspires.ftc.teamcode.Subsystems.LL.LimeLight
 
 object DriveHardware: Component {
     val filter = PoseKalmanFilter(Pose(0.0, 0.0, 0.0),
@@ -32,5 +33,9 @@ object DriveHardware: Component {
 
         // Get fused pose - this is your robot's position
         setPoseEstimate(filter.getPose())
+    }
+
+    override fun postUpdate() {
+        updatePoseEstimate(LimeLight.getPose())
     }
 }

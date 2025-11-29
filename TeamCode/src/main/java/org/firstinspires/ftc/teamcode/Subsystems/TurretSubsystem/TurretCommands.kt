@@ -1,0 +1,19 @@
+package org.firstinspires.ftc.teamcode.Subsystems.TurretSubsystem
+
+import dev.nextftc.core.commands.utility.InstantCommand
+import dev.nextftc.core.commands.utility.LambdaCommand
+import org.firstinspires.ftc.teamcode.Subsystems.TurretSubsystem.TurretHardware.setTargetPositionFromDegrees
+
+object TurretCommands {
+    fun moveToAngle(angle: Double) = InstantCommand{setTargetPositionFromDegrees(angle)}
+    fun moveToGlobalAngle(angle: Double) = InstantCommand{TurretHardware.setTargetPositionFromGlobalDegrees(angle)}
+    fun scan(stop: () -> Boolean, step: Double) =
+        LambdaCommand()
+            .setUpdate {
+                var currentAngle = TurretHardware.getEncoderPosition()
+                currentAngle += step
+                setTargetPositionFromDegrees(currentAngle)
+            }
+            .setIsDone { stop() }
+
+}

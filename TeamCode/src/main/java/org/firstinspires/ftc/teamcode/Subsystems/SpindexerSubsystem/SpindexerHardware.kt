@@ -7,13 +7,14 @@ import dev.nextftc.hardware.impl.CRServoEx
 import org.firstinspires.ftc.teamcode.Robot.MyTelemetry
 import org.firstinspires.ftc.teamcode.Subsystems.SpindexerSubsystem.SpindexerVars.targetPosition
 import org.firstinspires.ftc.teamcode.Util.AnglePID
+import org.firstinspires.ftc.teamcode.Util.AxonEncoder
 import org.firstinspires.ftc.teamcode.Util.SpindexerSlotState
 import org.firstinspires.ftc.teamcode.Util.SpindexerTracker
 import org.firstinspires.ftc.teamcode.Util.Util
 //TODO: Tune PIDF values
 //TODO: add color sensor integration
 object SpindexerHardware: Component {
-    val spindexerEncoder = lazy { hardwareMap.get(AnalogInput::class.java, "encoderForSpindexer1") }
+    val spindexerEncoder = lazy { AxonEncoder("spindexerEnc") }
     val spindexerServo1 = lazy { CRServoEx("spindexerServo1") }
     val spindexerServo2 = lazy { CRServoEx("spindexerServo2") }
     val tracker = SpindexerTracker()
@@ -28,7 +29,7 @@ object SpindexerHardware: Component {
     }
 
     fun getPosition(): Double {
-        return spindexerEncoder.value.voltage / 3.3 * 360.0
+        return spindexerEncoder.value.getPosition()
     }
 
     fun moveStateToPosition(color: SpindexerSlotState, pos: Int) : Boolean{
