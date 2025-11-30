@@ -5,7 +5,7 @@ import com.qualcomm.hardware.limelightvision.LLResult
 import com.qualcomm.hardware.limelightvision.Limelight3A
 import dev.nextftc.core.components.Component
 import dev.nextftc.ftc.ActiveOpMode.hardwareMap
-import org.firstinspires.ftc.teamcode.Robot.MyTelemetry
+import org.firstinspires.ftc.teamcode.Subsystems.Robot.MyTelemetry
 import org.firstinspires.ftc.teamcode.Subsystems.LL.LimeLightVars.offsetFromAxis
 import org.firstinspires.ftc.teamcode.Subsystems.TurretSubsystem.TurretHardware
 import org.firstinspires.ftc.teamcode.Util.Util.pose3dToPose

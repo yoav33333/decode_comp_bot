@@ -1,10 +1,8 @@
 package org.firstinspires.ftc.teamcode.Subsystems.SpindexerSubsystem
 
-import com.qualcomm.robotcore.hardware.AnalogInput
 import dev.nextftc.core.components.Component
-import dev.nextftc.ftc.ActiveOpMode.hardwareMap
 import dev.nextftc.hardware.impl.CRServoEx
-import org.firstinspires.ftc.teamcode.Robot.MyTelemetry
+import org.firstinspires.ftc.teamcode.Subsystems.Robot.MyTelemetry
 import org.firstinspires.ftc.teamcode.Subsystems.SpindexerSubsystem.SpindexerVars.targetPosition
 import org.firstinspires.ftc.teamcode.Util.AnglePID
 import org.firstinspires.ftc.teamcode.Util.AxonEncoder

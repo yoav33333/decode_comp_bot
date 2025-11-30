@@ -1,10 +1,8 @@
 package org.firstinspires.ftc.teamcode.Subsystems.TurretSubsystem
 
-import com.qualcomm.robotcore.hardware.AnalogInput
 import dev.nextftc.core.components.Component
-import dev.nextftc.ftc.ActiveOpMode.hardwareMap
 import dev.nextftc.hardware.impl.ServoEx
-import org.firstinspires.ftc.teamcode.Robot.MyTelemetry
+import org.firstinspires.ftc.teamcode.Subsystems.Robot.MyTelemetry
 import org.firstinspires.ftc.teamcode.Subsystems.DriveSubsystem.DriveHardware
 import org.firstinspires.ftc.teamcode.Subsystems.TurretSubsystem.TurretVars.offset
 import org.firstinspires.ftc.teamcode.Subsystems.TurretSubsystem.TurretVars.servoRange

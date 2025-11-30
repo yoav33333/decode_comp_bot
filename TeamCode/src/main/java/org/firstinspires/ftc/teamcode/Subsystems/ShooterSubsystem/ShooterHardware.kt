@@ -1,12 +1,9 @@
 package org.firstinspires.ftc.teamcode.Subsystems.ShooterSubsystem
 
-import dev.nextftc.control.builder.controlSystem
 import dev.nextftc.core.components.Component
-import dev.nextftc.hardware.controllable.RunToVelocity
-import dev.nextftc.hardware.delegates.Velocity
 import dev.nextftc.hardware.impl.MotorEx
 import dev.nextftc.hardware.impl.ServoEx
-import org.firstinspires.ftc.teamcode.Robot.MyTelemetry
+import org.firstinspires.ftc.teamcode.Subsystems.Robot.MyTelemetry
 import org.firstinspires.ftc.teamcode.Subsystems.ShooterSubsystem.ShooterVars.targetVelocity
 import org.firstinspires.ftc.teamcode.Util.VelocityPid
 //TODO: Finish Shooter Hardware

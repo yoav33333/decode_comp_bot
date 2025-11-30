@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.Robot
+package org.firstinspires.ftc.teamcode.Subsystems.Robot
 
 import com.bylazar.configurables.annotations.Configurable
 import org.firstinspires.ftc.teamcode.Util.SpindexerSlotState

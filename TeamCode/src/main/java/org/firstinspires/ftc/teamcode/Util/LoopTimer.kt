@@ -1,8 +1,7 @@
 package org.firstinspires.ftc.teamcode.Util
 
 import dev.nextftc.core.components.Component
-import dev.nextftc.ftc.ActiveOpMode
-import org.firstinspires.ftc.teamcode.Robot.MyTelemetry
+import org.firstinspires.ftc.teamcode.Subsystems.Robot.MyTelemetry
 import kotlin.time.ComparableTimeMark
 import kotlin.time.TimeSource.Monotonic.markNow
 

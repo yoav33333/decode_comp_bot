@@ -1,11 +1,10 @@
 package org.firstinspires.ftc.teamcode.Subsystems.SpindexerSubsystem
 
-import dev.nextftc.core.commands.conditionals.switchCommand
 import dev.nextftc.core.commands.delays.Delay
 import dev.nextftc.core.commands.groups.SequentialGroup
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.commands.utility.LambdaCommand
-import org.firstinspires.ftc.teamcode.Robot.RobotVars
+import org.firstinspires.ftc.teamcode.Subsystems.Robot.RobotVars
 import org.firstinspires.ftc.teamcode.Util.SpindexerSlotState
 import kotlin.time.Duration.Companion.seconds
 

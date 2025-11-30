@@ -12,9 +12,7 @@ class ShittyTeleop: MegiddoOpMode() {
         Gamepads.gamepad2.leftBumper
             .whenBecomesTrue(IntakeCommands.intake)
             .whenBecomesFalse(IntakeCommands.stopIntake)
-        Gamepads.gamepad2.rightBumper
-            .whenBecomesTrue { ShooterCommands.shoot }
-            .whenBecomesFalse { ShooterCommands.stopshoot }
+
     }
     override fun onStartButtonPressed() {
         DriveCommands.driverControlled.start()

@@ -6,7 +6,7 @@ import dev.nextftc.ftc.NextFTCOpMode
 import dev.nextftc.ftc.components.BulkReadComponent
 import org.firstinspires.ftc.teamcode.Subsystems.IntakeSubsystem.IntakeHardware
 import org.firstinspires.ftc.teamcode.Pedro.Constants
-import org.firstinspires.ftc.teamcode.Robot.MyTelemetry
+import org.firstinspires.ftc.teamcode.Subsystems.Robot.MyTelemetry
 import org.firstinspires.ftc.teamcode.Subsystems.Antony
 import org.firstinspires.ftc.teamcode.Subsystems.LL.LimeLight
 import org.firstinspires.ftc.teamcode.Subsystems.ShooterSubsystem.ShooterHardware
