@@ -6,7 +6,9 @@ import org.firstinspires.ftc.teamcode.Subsystems.TurretSubsystem.TurretHardware.
 
 object TurretCommands {
     fun moveToAngle(angle: Double) = InstantCommand{setTargetPositionFromDegrees(angle)}
+        .setRequirements(TurretHardware)
     fun moveToGlobalAngle(angle: Double) = InstantCommand{TurretHardware.setTargetPositionFromGlobalDegrees(angle)}
+        .setRequirements(TurretHardware)
     fun scan(stop: () -> Boolean, step: Double) =
         LambdaCommand()
             .setUpdate {
@@ -15,5 +17,6 @@ object TurretCommands {
                 setTargetPositionFromDegrees(currentAngle)
             }
             .setIsDone { stop() }
+            .setRequirements(TurretHardware)
 
 }
