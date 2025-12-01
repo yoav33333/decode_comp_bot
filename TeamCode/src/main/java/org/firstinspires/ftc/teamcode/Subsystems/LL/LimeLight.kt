@@ -21,7 +21,7 @@ object LimeLight: Component {
     }
 
     override fun postInit() {
-        setPipeline(LimeLightVars.aprilTagPipeline)
+        setPipeline(LimeLightVars.localizationPipeline)
         ll.value.setPollRateHz(50)
         ll.value.start()
     }

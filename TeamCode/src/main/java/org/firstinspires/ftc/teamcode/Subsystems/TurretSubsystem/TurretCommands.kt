@@ -24,5 +24,6 @@ object TurretCommands {
     val lockOnGoal = LambdaCommand()
         .setUpdate { calcGlobalHeadingToTarget(DriveHardware.getPoseEstimate(), RobotVars.goalPos) }
         .setIsDone { false }
+        .setRequirements(TurretHardware)
 
 }
