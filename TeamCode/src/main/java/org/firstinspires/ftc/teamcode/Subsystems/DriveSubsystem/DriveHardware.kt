@@ -16,6 +16,7 @@ object DriveHardware: Component {
     val filter = PoseKalmanFilter(Pose(0.0, 0.0, 0.0),
         trustDeadX, trustDeadY, trustDeadHeading,
         trustLLX, trustLLY, trustLLHeading)
+
     fun getPoseEstimate(): Pose {
         return follower.pose
     }
@@ -35,7 +36,12 @@ object DriveHardware: Component {
         setPoseEstimate(filter.getPose())
     }
 
+
+    override fun postInit() {
+
+    }
     override fun postUpdate() {
+
         updatePoseEstimate(LimeLight.getPose())
     }
 }

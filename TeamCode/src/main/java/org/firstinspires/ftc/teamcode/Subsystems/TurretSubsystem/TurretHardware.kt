@@ -5,6 +5,7 @@ import dev.nextftc.core.components.Component
 import dev.nextftc.hardware.impl.ServoEx
 import org.firstinspires.ftc.teamcode.Subsystems.Robot.MyTelemetry
 import org.firstinspires.ftc.teamcode.Subsystems.DriveSubsystem.DriveHardware
+import org.firstinspires.ftc.teamcode.Subsystems.TurretSubsystem.TurretCommands.lockOnGoal
 import org.firstinspires.ftc.teamcode.Subsystems.TurretSubsystem.TurretVars.offset
 import org.firstinspires.ftc.teamcode.Subsystems.TurretSubsystem.TurretVars.servoRange
 import org.firstinspires.ftc.teamcode.Util.AxonEncoder
@@ -48,7 +49,9 @@ object TurretHardware: Component {
         return atan(deltaVector.y/deltaVector.x)
     }
 
-
+    override fun postStartButtonPressed() {
+        lockOnGoal.schedule()
+    }
     override fun postUpdate() {
         MyTelemetry.addData("Turret Position", getPosition())
         MyTelemetry.addData("Turret Encoder Position", getEncoderPosition())
