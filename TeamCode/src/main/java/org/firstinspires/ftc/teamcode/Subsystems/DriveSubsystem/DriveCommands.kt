@@ -8,5 +8,5 @@ object DriveCommands {
         Gamepads.gamepad1.leftStickY,
         Gamepads.gamepad1.leftStickX,
         Gamepads.gamepad1.rightStickX
-    )
+    ).setRequirements(DriveHardware)
 }

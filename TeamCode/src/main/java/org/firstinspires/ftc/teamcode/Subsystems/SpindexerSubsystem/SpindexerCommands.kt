@@ -10,14 +10,15 @@ import kotlin.time.Duration.Companion.seconds
 
 object SpindexerCommands {
     fun rotate(steps: Int) =
-        InstantCommand{ SpindexerHardware.rotate(steps) }
+        InstantCommand{ SpindexerHardware.rotate(steps) }.setRequirements(SpindexerHardware)
     fun moveToIntakePosition() =
-        InstantCommand{ SpindexerHardware.moveEmptyToIntakePosition() }
+        InstantCommand{ SpindexerHardware.moveEmptyToIntakePosition() }.setRequirements(SpindexerHardware)
     fun moveToTransferPosition(color: SpindexerSlotState) =
-        InstantCommand{ SpindexerHardware.moveColorToTransferPosition(color) }
+        InstantCommand{ SpindexerHardware.moveColorToTransferPosition(color) }.setRequirements(SpindexerHardware)
     fun moveToTransferPositionLocking(color: SpindexerSlotState) = LambdaCommand()
         .setStart{ SpindexerHardware.moveColorToTransferPosition(color) }
         .setIsDone { SpindexerHardware.isAtTargetPosition()  }
+        .setRequirements(SpindexerHardware)
 
     val transferAll =
         SequentialGroup(
@@ -27,5 +28,5 @@ object SpindexerCommands {
             Delay(SpindexerVars.spinDelay.seconds),
             moveToTransferPositionLocking(RobotVars.randomization.value[2]),
             Delay(SpindexerVars.spinDelay.seconds),
-        )
+        ).setRequirements(SpindexerHardware)
 }
