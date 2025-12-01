@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Subsystems.TurretSubsystem
 
+import com.pedropathing.geometry.Pose
 import dev.nextftc.core.components.Component
 import dev.nextftc.hardware.impl.ServoEx
 import org.firstinspires.ftc.teamcode.Subsystems.Robot.MyTelemetry
@@ -8,6 +9,7 @@ import org.firstinspires.ftc.teamcode.Subsystems.TurretSubsystem.TurretVars.offs
 import org.firstinspires.ftc.teamcode.Subsystems.TurretSubsystem.TurretVars.servoRange
 import org.firstinspires.ftc.teamcode.Util.AxonEncoder
 import org.firstinspires.ftc.teamcode.Util.Util.wrap360
+import kotlin.math.atan
 
 object TurretHardware: Component {
     val servo1 = lazy { ServoEx("turretServo1") }
@@ -41,6 +43,11 @@ object TurretHardware: Component {
         val turretHeading = getEncoderPosition()
         return baseHeading + turretHeading
     }
+    fun calcGlobalHeadingToTarget(botPose:Pose, target: Pose): Double{
+        var deltaVector = botPose.minus(target)
+        return atan(deltaVector.y/deltaVector.x)
+    }
+
 
     override fun postUpdate() {
         MyTelemetry.addData("Turret Position", getPosition())

@@ -1,11 +1,14 @@
 package org.firstinspires.ftc.teamcode.Subsystems.Robot
 
 import com.bylazar.configurables.annotations.Configurable
+import com.pedropathing.geometry.Pose
 import org.firstinspires.ftc.teamcode.Util.SpindexerSlotState
 
 @Configurable
 object RobotVars {
-
+    var goalPosRed = Pose(0.0, 0.0, 0.0)
+    var goalPosBlue = Pose(0.0, 0.0, 0.0)
+    var goalPos = Pose(0.0, 0.0, 0.0)
     @JvmField var allianceColor = AllianceColor.RED
     @JvmField var randomization = Randomization.PPG
 }

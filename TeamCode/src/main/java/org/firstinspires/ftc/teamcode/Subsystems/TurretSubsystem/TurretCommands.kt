@@ -2,6 +2,9 @@ package org.firstinspires.ftc.teamcode.Subsystems.TurretSubsystem
 
 import dev.nextftc.core.commands.utility.InstantCommand
 import dev.nextftc.core.commands.utility.LambdaCommand
+import org.firstinspires.ftc.teamcode.Subsystems.DriveSubsystem.DriveHardware
+import org.firstinspires.ftc.teamcode.Subsystems.Robot.RobotVars
+import org.firstinspires.ftc.teamcode.Subsystems.TurretSubsystem.TurretHardware.calcGlobalHeadingToTarget
 import org.firstinspires.ftc.teamcode.Subsystems.TurretSubsystem.TurretHardware.setTargetPositionFromDegrees
 
 object TurretCommands {
@@ -18,5 +21,8 @@ object TurretCommands {
             }
             .setIsDone { stop() }
             .setRequirements(TurretHardware)
+    val lockOnGoal = LambdaCommand()
+        .setUpdate { calcGlobalHeadingToTarget(DriveHardware.getPoseEstimate(), RobotVars.goalPos) }
+        .setIsDone { false }
 
 }
