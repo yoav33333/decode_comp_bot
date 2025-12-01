@@ -49,9 +49,6 @@ object TurretHardware: Component {
         return atan(deltaVector.y/deltaVector.x)
     }
 
-    override fun postStartButtonPressed() {
-        lockOnGoal.schedule()
-    }
     override fun postUpdate() {
         MyTelemetry.addData("Turret Position", getPosition())
         MyTelemetry.addData("Turret Encoder Position", getEncoderPosition())

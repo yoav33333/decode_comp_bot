@@ -25,7 +25,14 @@ class SpindexerTracker {
     fun rotate(steps: Int) {
         offset = (offset + steps).mod(size)
     }
-
+    fun isFull(): Boolean {
+        for (i in 0 until size) {
+            if (this[i] == SpindexerSlotState.EMPTY) {
+                return false
+            }
+        }
+        return true
+    }
     // How many steps to get to the nearest slot with the given state
     fun stepsToState(state: SpindexerSlotState, pos: Int): Int? {
         var bestSteps: Int? = null
