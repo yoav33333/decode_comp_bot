@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Subsystems.DriveSubsystem
 
 import PoseKalmanFilter
 import com.pedropathing.geometry.Pose
+import com.pedropathing.math.Vector
 import dev.nextftc.core.components.Component
 import org.firstinspires.ftc.teamcode.Subsystems.DriveSubsystem.DriveVars.trustDeadHeading
 import org.firstinspires.ftc.teamcode.Subsystems.DriveSubsystem.DriveVars.trustDeadX
@@ -11,6 +12,8 @@ import org.firstinspires.ftc.teamcode.Subsystems.DriveSubsystem.DriveVars.trustL
 import org.firstinspires.ftc.teamcode.Subsystems.DriveSubsystem.DriveVars.trustLLY
 import org.firstinspires.ftc.teamcode.Pedro.Tuning.follower
 import org.firstinspires.ftc.teamcode.Subsystems.LL.LimeLight
+import org.firstinspires.ftc.teamcode.Subsystems.Robot.RobotVars
+import org.firstinspires.ftc.teamcode.Subsystems.Robot.RobotVars.vectorFromTarget
 
 object DriveHardware: Component {
     val filter = PoseKalmanFilter(Pose(0.0, 0.0, 0.0),
@@ -43,5 +46,7 @@ object DriveHardware: Component {
     override fun postUpdate() {
 
         updatePoseEstimate(LimeLight.getPose())
+        vectorFromTarget = getPoseEstimate().asVector.minus(RobotVars.goalPos)
+
     }
 }

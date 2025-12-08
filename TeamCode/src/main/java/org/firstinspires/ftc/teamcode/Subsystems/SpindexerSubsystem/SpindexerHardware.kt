@@ -21,7 +21,6 @@ import org.firstinspires.ftc.teamcode.Util.Util
 object SpindexerHardware: Component {
     val spindexerEncoder = lazy { AxonEncoder("spindexerEnc") }
     val spindexerServo1 = lazy { CRServoEx("spindexerServo1") }
-    val spindexerServo2 = lazy { CRServoEx("spindexerServo2") }
     val colorSensor = lazy { hardwareMap.get(RevColorSensorV3::class.java, "intakeColor") }
     val tracker = SpindexerTracker()
     val anglePID = AnglePID(SpindexerVars.p, SpindexerVars.i, SpindexerVars.d, SpindexerVars.f)
@@ -35,6 +34,10 @@ object SpindexerHardware: Component {
     fun isFull(): Boolean {
         return tracker.isFull()
     }
+    fun isEmpty(): Boolean{
+        return tracker.isEmpty()
+    }
+
     fun getColorInIntake(): SpindexerSlotState {
         if (!hasBallInIntake()) {
             return SpindexerSlotState.EMPTY
@@ -64,7 +67,6 @@ object SpindexerHardware: Component {
     }
     fun setPower(power: Double) {
         spindexerServo1.value.power = power
-        spindexerServo2.value.power = -power
     }
 
     fun getPosition(): Double {

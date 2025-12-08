@@ -14,7 +14,7 @@ object SpindexerVars {
     @JvmField var degreesPerSlot = 30
     @JvmField var intakeSlot = 0
     @JvmField var transferSlot = 1
-    @JvmField var spinDelay = 0.1
+    @JvmField var spinDelay = 0.5
     @JvmField var purpleRange = ColorRange(0.0,0.0,0.0,0.0,0.0,0.0)
     @JvmField var greenRange = ColorRange(0.0,0.0,0.0,0.0,0.0,0.0)
     @JvmField var distThreshold = 30

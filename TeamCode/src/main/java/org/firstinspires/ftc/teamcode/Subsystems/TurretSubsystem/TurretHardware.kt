@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.Subsystems.TurretSubsystem
 
 import com.pedropathing.geometry.Pose
+import com.pedropathing.math.Vector
 import dev.nextftc.core.components.Component
 import dev.nextftc.hardware.impl.ServoEx
 import org.firstinspires.ftc.teamcode.Subsystems.Robot.MyTelemetry
@@ -44,9 +45,8 @@ object TurretHardware: Component {
         val turretHeading = getEncoderPosition()
         return baseHeading + turretHeading
     }
-    fun calcGlobalHeadingToTarget(botPose:Pose, target: Pose): Double{
-        var deltaVector = botPose.minus(target)
-        return atan(deltaVector.y/deltaVector.x)
+    fun calcGlobalHeadingToTarget(target: Vector): Double{
+        return target.theta
     }
 
     override fun postUpdate() {

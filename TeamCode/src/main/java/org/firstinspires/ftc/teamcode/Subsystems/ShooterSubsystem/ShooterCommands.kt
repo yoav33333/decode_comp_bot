@@ -7,4 +7,6 @@ object ShooterCommands {
         InstantCommand{ ShooterHardware.setVelocity(velocity)}.setRequirements(ShooterHardware)
     fun setHoodPosition(position: Double) =
         InstantCommand{ ShooterHardware.setHoodPosition(position)}.setRequirements(ShooterHardware)
+    fun shoot(distance: Double) =
+        InstantCommand{ ShooterHardware.shoot(distance)}
 }

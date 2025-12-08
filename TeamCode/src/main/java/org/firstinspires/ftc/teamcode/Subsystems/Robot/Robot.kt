@@ -9,4 +9,7 @@ object Robot: Component {
     override fun preInit() {
         RobotVars.goalPos = if (allianceColor == AllianceColor.RED)goalPosRed else goalPosBlue
     }
+    fun getDistFromGoal(){
+
+    }
 }
